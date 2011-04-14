@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'zanox'
-
+require '../zapoddilg_keys'
 
 
 configure do
@@ -35,9 +35,10 @@ get '/apps' do
   #Zanox::API::
   unless Zanox::API::Session.connect_id.nil?
     @page = (params[:page] || 1).to_i
-    @admedia = Zanox::Admedium.find(:all ) # , :items=>10, :page=> @page-1, partnership => 'direct', purpose=>'productdeeplink'
+    @admedia = Zanox::Admedium.find(:all , :items=>50, :page=> @page-1, partnerShip => 'direct') #, purpose=>'productdeeplink'
   end
   unless @admedia.nil?
+    @connected = true
     haml :admedia
   else
     @error = 'Admedia could not be accessed'

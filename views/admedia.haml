@@ -3,9 +3,9 @@
   %p zanox Connect successful
 - else
   %p zanox Connect not successful
-- end
+
 
 - if @admedia.size > 1
   %ul
   - @admedia.each do |admedium|
-    %li = (admedium.name.size>40)?admedium.name.[0..40] : admedium.name
+    %li= (admedium.name.size>40) ? admedium.name[0..39]+"..." : admedium.name

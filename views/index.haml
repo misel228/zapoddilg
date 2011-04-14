@@ -1,5 +1,6 @@
 %h3 Startseite
 %p
-=@connected
 - if not @connected
     %a{:href => $zanox_connect_link, :title=> 'blabla'} Connect with zanox
+- else
+    %a{:href => '/apps', :title=> 'blabla'} Show Admedia
