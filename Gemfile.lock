@@ -1,0 +1,37 @@
+GIT
+  remote: https://github.com/kr1sp1n/zanox.git
+  revision: 6043ec033599441f05e7f47945d57c6b08d4cfc2
+  branch: master
+  specs:
+    zanox (0.2.7)
+      ruby-hmac
+      ruby-hmac
+      soap4r
+      soap4r
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    daemons (1.1.2)
+    eventmachine (0.12.10)
+    haml (3.0.25)
+    httpclient (2.2.0)
+    rack (1.2.2)
+    ruby-hmac (0.4.0)
+    sinatra (1.0)
+      rack (>= 1.0)
+    soap4r (1.5.8)
+      httpclient (>= 2.1.1)
+    thin (1.2.11)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  haml
+  sinatra (= 1.0.0)
+  thin
+  zanox!

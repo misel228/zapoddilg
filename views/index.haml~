@@ -1,0 +1,4 @@
+%h3 Startseite
+%p
+- if not @connected
+    %a{:href => $zanox_connect_link, :title=> 'blabla'} Connect with zanox

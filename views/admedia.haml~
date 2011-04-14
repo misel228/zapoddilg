@@ -1,0 +1,5 @@
+%h2 Ad Media List
+- if @admedia.size > 1
+  %ul
+  - @admedia.each do |admedium|
+    %li = (admedium.name.size>40)?admedium.name.[0..40] : admedium.name

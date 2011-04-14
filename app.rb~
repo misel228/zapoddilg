@@ -1,0 +1,50 @@
+require 'rubygems'
+require 'sinatra'
+require 'haml'
+require 'zanox'
+
+
+#zanox Application ID:		1A954C44E978336DABF8
+#Connect ID:			99DBC8C44D79BB311638
+
+configure do
+  $zanox_connect_link='https://auth.zanox-affiliate.de/login?appid=1A954C44E978336DABF8'
+  PUBLIC_KEY = "C4DD6E94020A5F59C2CB"
+  SECRET_KEY ="F315a096995d44+4932ef9396213f6/0ed7a6f4E"
+  Zanox::API.public_key = PUBLIC_KEY
+  Zanox::API.secret_key = SECRET_KEY
+end
+
+get '/' do
+  if Zanox::API::Session.connect_id.nil?
+    @connected = false
+  else
+    @connected = true
+  end
+  haml :index
+end
+
+get '/auth' do
+  #login here
+  if(params[:authtoken]) 
+    Zanox::API::Session.new(params[:authtoken])
+    redirect '/apps'
+  else 
+    @error = 'Login unsuccessful - could not get session'
+    haml :nosuccess
+  end
+end
+
+get '/apps' do
+  #Zanox::API::
+  unless Zanox::API::Session.connect_id.nil?
+    @page = (params[:page] || 1).to_i
+    @admedia = Zanox::Admedium.find(:all ) # , :items=>10, :page=> @page-1, partnership => 'direct', purpose=>'productdeeplink'
+  end
+  unless @admedia.nil?
+    haml :admedia
+  else
+    @error = 'Admedia could not be accessed'
+    haml :nosuccess
+  end
+end
