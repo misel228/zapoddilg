@@ -1,7 +1,6 @@
 clean:
 	rm *~
 	rm views/*~
-	return 0
 
 commit:
 	git add .

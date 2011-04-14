@@ -8,4 +8,11 @@
 - if @admedia.size > 1
   %ul
   - @admedia.each do |admedium|
-    %li= (admedium.name.size>40) ? admedium.name[0..39]+"..." : admedium.name
+    %li
+      %a{:href=>admedium.trackingLinks.trackingLink[0].ppc} 
+        =(admedium.name.size>40) ? admedium.name[0..39]+"..." : admedium.name
+%p
+  -puts @admedia.inspect
+
+
+/ %a{:href=>admedium.trackingLinks.trackingLink[0].ppc}
