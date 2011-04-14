@@ -35,7 +35,7 @@ get '/apps' do
   #Zanox::API::
   unless Zanox::API::Session.connect_id.nil?
     @page = (params[:page] || 1).to_i
-    @admedia = Zanox::Admedium.find(:all , :items=>5, :page=> @page-1, :purpose=>'productDeeplink', :partnerShip => 'direct') #
+    @admedia = Zanox::Admedium.find(:all , :items=>5, :page=> @page-1, :purpose=>'productDeeplink', :partnerShip => 'direct')
     @admedia.inspect
   end
   unless @admedia.nil?
