@@ -1,0 +1,22 @@
+POST /soap/2011-03-01 HTTP/1.1
+SOAPAction: "http://api.zanox.com/namespace/2011-03-01/GetAdmedia"
+Content-Type: text/xml; charset=utf-8
+User-Agent: SOAP4R/1.5.5 (/, ruby 1.8.7 (2010-06-23) [i686-linux])
+Date: Fri, 15 Apr 2011 06:47:10 GMT
+Content-Length: 572
+Host: api.zanox.com
+
+<?xml version="1.0" encoding="utf-8" ?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+  <env:Body>
+    <n1:GetAdmediaRequest xmlns:n1="http://api.zanox.com/namespace/2011-03-01/">
+      <n1:partnerShip>direct</n1:partnerShip>
+      <n1:purpose>productDeeplink</n1:purpose>
+      <n1:page>0</n1:page>
+      <n1:items>5</n1:items>
+      <n1:connectId>99DBC8C44D79BB311638</n1:connectId>
+    </n1:GetAdmediaRequest>
+  </env:Body>
+</env:Envelope>
