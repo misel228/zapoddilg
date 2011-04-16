@@ -4,18 +4,14 @@
 - else
   %p zanox Connect not successful
 
-
-- if @admedia.size > 0
+- if @programApplications.size > 0
   %ul
-  - @admedia.each do |admedium|
-    %li
-      %a{:href=>admedium.trackingLinks.trackingLink[0].ppc} 
-        =(admedium.name.size>40) ? admedium.name[0..39]+"..." : admedium.name
+    - @programApplications.each do |programApplication|
+      %li
+        =programApplication.program['id'].to_s + ' ' + programApplication.status
 - else
   %p
-    No admedia found
-%p
-  -puts @admedia.inspect
+    blabla
+    
+=@programApplications[0].inspect
 
-
-/ %a{:href=>admedium.trackingLinks.trackingLink[0].ppc}
