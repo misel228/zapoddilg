@@ -1,0 +1,12 @@
+%h2 Ad Spaces List
+- if @adspaces.size > 0
+  %p
+    ='Number of adspaces: ' + @adspaces.size.to_s
+  %ul
+    - @adspaces.each do |adspace|
+      %li
+        =adspace.name
+- else
+  %p
+    Oops - No adspaces found
+
