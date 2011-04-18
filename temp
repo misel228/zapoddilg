@@ -1,0 +1,14 @@
+
+/- if @admedia.size > 0
+/  %ul
+/  - @admedia.each do |admedium|
+/    %li
+/      %a{:href=>admedium.trackingLinks.trackingLink[0].ppc} 
+/        =(admedium.name.size>40) ? admedium.name[0..39]+"..." : admedium.name
+/- else
+/  %p
+/    No admedia found
+/%p
+/  -puts @admedia.inspect
+/ %a{:href=>admedium.trackingLinks.trackingLink[0].ppc}
+=(program.name.size>40) ? program.name[0..39]+"..." : program.name

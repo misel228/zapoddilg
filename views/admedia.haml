@@ -4,14 +4,18 @@
 - else
   %p zanox Connect not successful
 
-- if @programApplications.size > 0
+- if @deeplinks.size > 0
+  %p
+    =@deeplinks.size
+  %p
+    @deeplinks.total
   %ul
-    - @programApplications.each do |programApplication|
+    - @deeplinks.each do |deeplink|
       %li
-        =programApplication.program['id'].to_s + ' ' + programApplication.status
+        =deeplink.trackingLinks.trackingLink
 - else
   %p
     blabla
     
-=@programApplications[0].inspect
+=@deeplinks[0].inspect
 
