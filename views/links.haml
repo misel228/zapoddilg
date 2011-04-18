@@ -1,4 +1,8 @@
 %p
-  =@admedia.size
-%p
-  =@admedia.inspect
+%ul
+  - if @admedia.size > 0
+    - @admedia.each do |admedium|
+      %li
+        %a{:href=>admedium.trackingLinks.trackingLink.ppc}
+          =admedium.name
+

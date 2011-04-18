@@ -47,26 +47,26 @@ get '/apps' do
     myPrograms = myPrograms + programApplications
 
     page = 1
-    while (programApplications.size > 0) do
+    while (programApplications.size > 0 ) do
       programApplications = Zanox::ProgramApplication.find(:all, :status => 'confirmed', :items => PAGE_SIZE, :page => page)
       page+=1
       myPrograms=myPrograms + programApplications
     end
 
-    partnerData = []
-    myPrograms.each{ |myProgram|
-      myPartnerData = PartnerData.new(myProgram.adspace.xmlattr_id, myProgram.program.xmlattr_id)
-      myPartnerData.inspect
-      partnerData = partnerData.push(myPartnerData)
-    }
-    
+#     partnerData = []
+#     myPrograms.each{ |myProgram|
+#       myPartnerData = PartnerData.new(myProgram.adspace.xmlattr_id, myProgram.program.xmlattr_id)
+#       myPartnerData.inspect
+#       partnerData = partnerData.push(myPartnerData)
+#     }
+
     deeplinks = []
     myPrograms.each do |myProgram|
-      admedia = Zanox::Admedium.find(:all , :purpose=>'productDeeplink', :program => myProgram.program.xmlattr_id, :adspace => myProgram.adspace.xmlattr_id)
+      admedia = Zanox::Admedium.find(:all , :purpose=>'productDeeplink', :programId => myProgram.program.xmlattr_id, :adspaceId => myProgram.adspace.xmlattr_id)
       deeplinks = deeplinks + admedia
     end
 
-    
+
 #    @page = (params[:page] || 1).to_i
 #    @admedia = Zanox::Admedium.find(:all , :items=>5, :page=> @page-1, :purpose=>'productDeeplink', :partnerShip => 'direct')
 #    @admedia.inspect
@@ -92,6 +92,6 @@ post '/input' do
 end
 
 get '/links' do
-  @admedia = Zanox::Admedium.find(:all , :purpose=>'productDeeplink', :program => 430, :adspace => 205575)
+  @admedia = Zanox::Admedium.find(:all , :purpose=>'productDeeplink', :programId => 430.to_s, :adspaceId => 205575.to_s)
   haml :links
 end

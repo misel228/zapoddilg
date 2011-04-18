@@ -8,8 +8,11 @@
       zapoddilg - zanox product data download link generator
     %div
       %a{:href=>'/'}  Home
-      %a{:href=>'/apps'}  Admedia
       %a{:href=>'/input'}  Put PD link
+      - if @connected 
+        %a{:href=>'/apps'}  Admedia
+      - if @connected 
+        %a{:href=>'/links'}  Links
 
     .content
       = yield
