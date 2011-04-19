@@ -3,15 +3,18 @@
 - if @deeplinks.size > 0
   %p
     =@deeplinks.size
-  %p
-    @deeplinks.total
   %ul
     - @deeplinks.each do |deeplink|
       %li
         =deeplink.trackingLinks.trackingLink.ppc
 - else
   %p
-    blabla
-    
-=@deeplinks[0].inspect
+    No admedia found
 
+- if @partnerCodes.size > 0
+  %p
+    =@partnerCodes.size
+  %ul
+    - @partnerCodes.each do |partnerCode|
+      %li
+        =partnerCode

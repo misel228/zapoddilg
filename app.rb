@@ -20,9 +20,11 @@ end
 
 get '/auth' do
   #login here
-  if(params[:authtoken]) 
+  if(params[:authtoken])
     Zanox::API::Session.new(params[:authtoken])
+#     puts Zanox::Session.getUiUrl()
     session[:connected]=true
+    #session[:ui_url] = 
     redirect '/'
   else 
     @error = 'Login unsuccessful - could not get session'
@@ -48,11 +50,19 @@ get '/apps' do
       admedia = Zanox::Admedium.find(:all , :purpose=>'productDeeplink', :programId => myProgram.program.xmlattr_id, :adspaceId => myProgram.adspace.xmlattr_id)
       deeplinks = deeplinks + admedia
     end
+    
+#    /^.*\/ppc\/\?(\d+C\d+)&.*/
+#    myarray = mystring.scan(/^.*\/ppc\/\?(\d+C\d+)&.*/)
+     partnerCodes = []
+     deeplinks.each do |deeplink|
+       partnerCodes += deeplink.trackingLinks.trackingLink.ppc.scan(/^.*\/ppc\/\?(\d+C\d+)&.*/);
+     end
 
   end
   unless deeplinks.nil?
     @connected = session[:connected]
     @deeplinks = deeplinks
+    @partnerCodes = partnerCodes
     haml :admedia
   else
     @connected = session[:connected]
@@ -62,12 +72,19 @@ get '/apps' do
 end
 
 get '/input' do
+  @connected = session[:connected]
+  if @connected
+    @ui_url = Zanox::Connect.ui_url()
+  end
+  @url=session[:url]
   haml :input
 end
 
 post '/input' do
   @connected = session[:connected]
-  @url = params[:url]
+  session[:url]=params[:url]
+  @url=session[:url]
+  @stored = true
   haml :input
 end
 
@@ -83,3 +100,7 @@ get '/adspaces' do
   haml :adspaces
 end
 
+get '/logout' do
+  @connected = session[:connected] = false
+  haml :index
+end
