@@ -1,12 +1,18 @@
 %h2 Ad Spaces List
 - if @adspaces.size > 0
-  %p
-    ='Number of adspaces: ' + @adspaces.size.to_s
-  %ul
-    - @adspaces.each do |adspace|
-      %li
-        =adspace.name
+  %form{:method=>'post', :action=>'/adspaces'}
+    %p
+      Select the add spaces that you want to get your PD links for
+    %ul
+      - @adspaces.each do |adspace|
+        %li
+          %input{:type => 'checkbox',:name=>'name_adspace_'+adspace.xmlattr_id,:id=>'adspace_'+adspace.xmlattr_id,:value=>'adspace.xmlattr_id}
+          %label{:for=>'adspace_'+adspace.xmlattr_id}
+            =adspace.name
+    %p
+      %input{:type=>'submit', :value=>'Submit'}
 - else
   %p
     Oops - No adspaces found
 
+=@selectedAdspaces

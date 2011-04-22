@@ -2,7 +2,7 @@
   Sample product data link
 %p
   - if not @ui_url.nil?
-    %a{:href => @ui_url.url, :target => '_blank'} Go to zanox user interface
+    %a{:href => @ui_url, :target => '_blank'} Go to zanox user interface
   - else
     %a{:href => 'http://ui.zanox-affiliate.de', :target => '_blank'} Go to zanox user interface
 
@@ -10,7 +10,7 @@
   Paste your PD-link here
 %form{:method=>'post', :action=>'/input'}
   %p
-    %input{:type=>'text', :name=>'url', :value=>@url}
+    %input{:type=>'text', :name=>'url', :value=>@url, :size=> 60}
   %p
     %input{:type=>'submit', :value=>'Submit'}
   - if @stored

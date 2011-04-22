@@ -8,11 +8,19 @@
       zapoddilg - zanox product data download link generator
     %div
       %a{:href=>'/'}  Home
-      %a{:href=>'/input'}  Put PD link
       - if @connected 
-        %a{:href=>'/apps'}  Admedia
+        %a{:href=>'/input'}  Put PD link
         %a{:href=>'/adspaces'}  Adspaces
+        %a{:href=>'/apps'}  Get All links
         %a{:href=>'/logout'}  Log Out
 
+    -if @connected
+      %div
+        %p
+          Hello 
+          =@firstName
+        %p
+          you are connected as 
+          =@userName
     .content
       = yield
