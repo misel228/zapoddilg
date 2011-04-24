@@ -30,7 +30,7 @@ get '/auth' do
   if(params[:authtoken])
     Zanox::API::Session.new(params[:authtoken])
     session[:connected]=true
-    redirect '/input'
+    redirect '/'
   else 
     @error = 'Login unsuccessful - could not get session'
     haml :nosuccess
@@ -60,7 +60,16 @@ get '/apps' do
 #    myarray = mystring.scan(/^.*\/ppc\/\?(\d+C\d+)&.*/)
      partnerCodes = []
      deeplinks.each do |deeplink|
-       partnerCodes += deeplink.trackingLinks.trackingLink.ppc.scan(/^.*\/ppc\/\?(\d+C\d+)&.*/);
+       code = deeplink.trackingLinks.trackingLink.ppc.scan(/^.*\/ppc\/\?(\d+C\d+)&.*/)
+       partnerCodes += code[0]
+     end
+
+     pdLinks = []
+     place_holder = session[:str_replacement].to_s
+     subject = session[:url].to_s
+     partnerCodes.each do |partnerCode|
+       blubb = subject.sub(place_holder,partnerCode)
+       pdLinks.push(blubb)
      end
 
   end
@@ -69,8 +78,13 @@ get '/apps' do
     @userName = session[:user_name]
     @firstName = session[:first_name]
     @connected = session[:connected]
+    @url = session[:url]
+    @string = session[:str_replacement]
+    
+    
     @deeplinks = deeplinks
     @partnerCodes = partnerCodes
+    @pdLinks = pdLinks
     haml :admedia
   else
     @connected = session[:connected]
@@ -99,10 +113,18 @@ post '/input' do
   @userId = session[:user_id]
   @userName = session[:user_name]
   @firstName = session[:first_name]
-  session[:url]=params[:url]
-  @url=session[:url]
-  @stored = true
-  redirect '/adspaces'
+
+  matches = params[:url].match(/^http:\/\/productdata.zanox.com\/((exportservice\/.*\/rest\/)|(.*)Format.aspx\?partnerCode=)(\d+C\d+)(.{4}).*/)
+  if(!matches)
+    @stored = false
+  else
+    session[:str_replacement] = matches[4]
+    session[:url]=params[:url]
+    @url=session[:url]
+    @str_replacement = session[:str_replacement]
+    @stored = true
+  end
+
   haml :input
 end
 

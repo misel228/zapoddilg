@@ -1,20 +1,8 @@
 %h2 Ad Media List
-
-- if @deeplinks.size > 0
+- if @pdLinks.size > 0
   %p
-    =@deeplinks.size
+    =@pdLinks.size
   %ul
-    - @deeplinks.each do |deeplink|
+    - @pdLinks.each do |pdLink|
       %li
-        =deeplink.trackingLinks.trackingLink.ppc
-- else
-  %p
-    No admedia found
-
-- if @partnerCodes.size > 0
-  %p
-    =@partnerCodes.size
-  %ul
-    - @partnerCodes.each do |partnerCode|
-      %li
-        =partnerCode
+        =pdLink
