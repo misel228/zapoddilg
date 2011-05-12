@@ -1,0 +1,17 @@
+ require 'sqlite'
+ db = SQLite::Database.new( 'zapoddilg.db' )
+
+ db.execute <<SQL
+
+  CREATE TABLE users (
+   zx_user_id INTEGER PRIMARY KEY,
+   zx_user_name VARCHAR(255),
+   zx_adspaces VARCHAR(1023),
+   zx_pd_link VARCHAR(4095),
+   zx_offline_token VARCHAR(255),
+   offline_hash VARCHAR(255)
+  );
+
+ SQL
+
+ puts db.complete? "SELECT * FROM users;"
