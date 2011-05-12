@@ -13,11 +13,12 @@
     %input{:type=>'text', :name=>'url', :value=>@url, :size=> 60}
   %p
     %input{:type=>'submit', :value=>'Submit'}
-  - if @stored
-    %p
-      Stored!
-      =@str_replacement
-  - else
-    %p
-      The link was not recognised as a zanox product data link. Please try again!
+    - if @showEvalMessage
+      - if @stored
+        %p
+          Stored!
+          =@str_replacement
+      - else
+        %p
+          The link was not recognised as a zanox product data link. Please try again!
 

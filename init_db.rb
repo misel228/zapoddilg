@@ -1,7 +1,7 @@
- require 'sqlite'
- db = SQLite::Database.new( 'zapoddilg.db' )
+ require 'sqlite3'
+ db = SQLite3::Database.new( 'zapoddilg.db' )
 
- db.execute <<SQL
+ db.execute "
 
   CREATE TABLE users (
    zx_user_id INTEGER PRIMARY KEY,
@@ -12,7 +12,7 @@
    offline_hash VARCHAR(255)
   );
 
- SQL
+ "
 
  puts db.complete? "SELECT * FROM users;"
  
