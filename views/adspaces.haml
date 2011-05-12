@@ -6,7 +6,10 @@
     %ul
       - @adspaces.each do |adspace|
         %li
-          %input{:type => 'checkbox',:name=>'name_adspace_'+adspace.xmlattr_id,:id=>'adspace_'+adspace.xmlattr_id,:value=>'adspace.xmlattr_id}
+          - if not @selectedAdspaces.nil? and @selectedAdspaces.include?(adspace.xmlattr_id)
+            %input{:type => 'checkbox', :id=>'adspace_'+adspace.xmlattr_id ,:name=>'name_adspace_'+adspace.xmlattr_id , :value=>adspace.xmlattr_id , :checked=>'checked'}
+          - else
+            %input{:type => 'checkbox', :id=>'adspace_'+adspace.xmlattr_id ,:name=>'name_adspace_'+adspace.xmlattr_id , :value=>adspace.xmlattr_id}
           %label{:for=>'adspace_'+adspace.xmlattr_id}
             =adspace.name
     %p
@@ -15,4 +18,4 @@
   %p
     Oops - No adspaces found
 
-=@selectedAdspaces
+=@selectedAdspaces.inspect
